@@ -32,6 +32,7 @@ import type {
   TeachingDeckItemType,
   UserProfile,
   UserPublicActivity,
+  UserContributionSummary,
   UserBadgeSummary,
   BadgeColor,
   UserTagSummary,
@@ -179,6 +180,15 @@ export function getUserProfile(userId: string) {
 
 export function getUserPublicActivity(userId: string) {
   return request<UserPublicActivity>(`/auth/profile/${userId}/activity`);
+}
+
+export function getUserContributions(
+  userId: string,
+  range: "last_year" | number = "last_year",
+) {
+  return request<UserContributionSummary>(
+    `/auth/profile/${encodeURIComponent(userId)}/contributions?year=${encodeURIComponent(String(range))}`,
+  );
 }
 
 export function listNotifications(input?: {

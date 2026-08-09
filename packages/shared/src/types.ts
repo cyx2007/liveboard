@@ -129,6 +129,26 @@ export interface UserProfile extends UserSummary {
   openContentInCurrentTab: boolean;
 }
 
+export type UserContributionCategory =
+  "learning" | "teaching" | "community" | "resources";
+
+export interface UserContributionSummary {
+  range: {
+    mode: "last_year" | "year";
+    year: number | null;
+    from: string;
+    to: string;
+  };
+  total: number;
+  days: Array<{ date: string; count: number }>;
+  categories: Array<{
+    category: UserContributionCategory;
+    count: number;
+  }>;
+  availableYears: number[];
+  timeZone: string;
+}
+
 export interface UserPublicActivity {
   forumThreads: Array<{
     id: string;
